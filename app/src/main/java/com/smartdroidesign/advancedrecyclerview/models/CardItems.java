@@ -16,6 +16,10 @@ public class CardItems {
         this.mLineTwo = mLineTwo;
     }
 
+    public void changeTextOne (String text){
+        mLineOne = text;
+    }
+
     public int getmImageResource() {
         return mImageResource;
     }

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.smartdroidesign.advancedrecyclerview.R;
 import com.smartdroidesign.advancedrecyclerview.adapters.CardAdapter;
 import com.smartdroidesign.advancedrecyclerview.models.CardItems;
+import com.smartdroidesign.advancedrecyclerview.services.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<CardItems> mCardList;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private Button buttonInsert;
@@ -57,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     public void insertItem (int position){
@@ -72,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
         mCardList.remove(position);
         mAdapter.notifyItemRemoved(position);
 
+
+    }
+
+    public void changeItem (int position, String text){
+        mCardList.get(position).changeTextOne(text);
+        mAdapter.notifyItemChanged(position);
 
     }
 
@@ -91,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position, "Clicked");
+            }
+        });
 
     }
 }

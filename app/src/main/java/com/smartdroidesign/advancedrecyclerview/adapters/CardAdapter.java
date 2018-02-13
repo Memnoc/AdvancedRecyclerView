@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.smartdroidesign.advancedrecyclerview.R;
 import com.smartdroidesign.advancedrecyclerview.holders.CardViewHolder;
 import com.smartdroidesign.advancedrecyclerview.models.CardItems;
+import com.smartdroidesign.advancedrecyclerview.services.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,13 @@ import java.util.ArrayList;
 public class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     private ArrayList<CardItems> mCardList;
+    private OnItemClickListener mListener;
+
+
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public CardAdapter(ArrayList<CardItems> cardList) {
         mCardList = cardList;
@@ -27,7 +35,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_item_content, parent, false);
-        CardViewHolder cvh = new CardViewHolder(v);
+        CardViewHolder cvh = new CardViewHolder(v, mListener);
         return cvh;
     }
 
