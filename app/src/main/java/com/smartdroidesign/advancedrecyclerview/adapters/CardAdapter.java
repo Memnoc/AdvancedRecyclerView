@@ -55,4 +55,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
         return mCardList.size();
     }
 
+    public void filterList (ArrayList<CardItems> filteredList) {
+        mCardList = filteredList;
+        notifyDataSetChanged();
+    }
+
 }

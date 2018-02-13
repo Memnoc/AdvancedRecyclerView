@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,8 +39,37 @@ public class MainActivity extends AppCompatActivity {
         buildRecyclerView();
         setButtons();
 
+        EditText editText = findViewById(R.id.search_edit_txt);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+
+            }
+        });
+
+    }
+
+    private void filter (String text) {
+        ArrayList<CardItems> filteredList = new ArrayList<>();
+
+        for (CardItems item: mCardList) {
+            if (item.getmLineOne().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        mAdapter.filterList(filteredList);
     }
 
     public void insertItem (int position){
@@ -67,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         mCardList.add(new CardItems(R.drawable.ic_sun, "Line 5", "Line 6"));
 
     }
+
 
     public void buildRecyclerView(){
         mRecyclerView = findViewById(R.id.main_recycler_view);
