@@ -17,12 +17,14 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     public ImageView mImageView;
     public TextView mLineOne;
     public TextView mLineTwo;
+    public ImageView mDeleteImage;
 
     public CardViewHolder(View itemView, final OnItemClickListener listener) {
         super(itemView);
         mImageView = itemView.findViewById(R.id.imageOne);
         mLineOne = itemView.findViewById(R.id.lineOneTxt);
-        mLineTwo  =itemView.findViewById(R.id.lineTwoTxt);
+        mLineTwo = itemView.findViewById(R.id.lineTwoTxt);
+        mDeleteImage = itemView.findViewById(R.id.imag_delete);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,18 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(position);
+                    }
+                }
+            }
+        });
+
+        mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onDeleteClick(position);
                     }
                 }
             }

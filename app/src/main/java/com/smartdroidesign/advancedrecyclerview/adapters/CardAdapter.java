@@ -23,6 +23,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
 
 
+
     public void setOnItemClickListener(OnItemClickListener listener){
         mListener = listener;
     }
